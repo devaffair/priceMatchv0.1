@@ -111,13 +111,21 @@ $(document).ready(function(){
 		var data = JSON.parse(objCookies.Get(CONST_LOGGED_IN));
 		UserAccount.MyItems = data.MyItems;
 		UserAccount.Email = data.Email;
+		UserAccount.RegisteredUserActions();
 	}
 });
 
 var UserAccount = {
 	Id: "XXX",
+	Role: "None",
 	Email: "XXX",
 	MyItems: [],
+	RegisteredUserActions: function() {
+		if (UserAccount.Role != "Admin" && UserAccount.Role != "Contributor") {
+			// hide insert option
+			$(".navbar-nav .dropdown-menu a:contains(Insert)").hide();
+		}
+	},
 	Login:function(){
 		var email = $("#email").val();
 		
@@ -147,9 +155,7 @@ var UserAccount = {
 				}
 				
 				UserAccount.Email = data[0].Email;
-				
-				console.log("main.js: 150");
-				console.log(UserAccount);
+				UserAccount.Role = data[0].Role;
 				
 				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);

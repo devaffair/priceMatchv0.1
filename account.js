@@ -32,7 +32,6 @@ var CONST_LOGGED_IN = "LoggedIn"
 var BaseActions = {
 	VerifyLogin: function() {
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
-		console.log("account.js 6 - " + isLoggedIn);
 		var currentPath = window.location.href.split('/')[window.location.href.split('/').length-1];
 		if (isLoggedIn) {
 			if (currentPath == 'index.html') {
