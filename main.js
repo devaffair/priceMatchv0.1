@@ -23,15 +23,16 @@ var Search = {
 		if (mongoQuery.length > 0) {
 			url = url + mongoQuery;
 		}
+		
+		$(".navbar-toggle").click()
+		Loading.Show();
+		$(".container").slideUp(500);
+		
 		$.ajax({
 			url: url,
 			// data: obj,
 			success: function(data){
 				var templateHTML = $(".container .row:first")[0].outerHTML;
-				
-				Loading.Show();
-				
-				$(".container").slideUp(500);
 
 				$(".container .row").each(function(i){
 					if (i > 0) {
