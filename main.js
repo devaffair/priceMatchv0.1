@@ -111,6 +111,7 @@ $(document).ready(function(){
 		var data = JSON.parse(objCookies.Get(CONST_LOGGED_IN));
 		UserAccount.MyItems = data.MyItems;
 		UserAccount.Email = data.Email;
+		UserAccount.Role = data.Role;
 		UserAccount.RegisteredUserActions();
 	}
 });
@@ -121,6 +122,7 @@ var UserAccount = {
 	Email: "XXX",
 	MyItems: [],
 	RegisteredUserActions: function() {
+	console.log(UserAccount.Role);
 		if (UserAccount.Role != "Admin" && UserAccount.Role != "Contributor") {
 			// hide insert option
 			$(".navbar-nav .dropdown-menu a:contains(Insert)").hide();
