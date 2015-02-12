@@ -108,3 +108,15 @@ text-align: center;
 text-align: left;
 margin-top: 15px;
 }
+.frontPage input[type="text"] {
+width: 100%;
+}
+.frontPage, .searchResults {
+background-image: url("img/footer_lodyas.png");
+}
+.logo_img {
+    display: block;
+    max-width: 50%;
+    margin: 0 auto;
+}
+.logo{margin-bottom: 30px;}
