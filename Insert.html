@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<title>DevAffair - Price Compare App</title>
+		
+		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+		<script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+		<script src="account.js"></script>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="all.css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="search.html">Price Compare</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="searchHistory.html">My Saved Items</a></li>
+							<li><a href="#" onclick="BaseActions.Logout();">Logout</a></li>                 
+							<li><a href="Insert.html">Insert</a></li>                 
+						</ul>
+					</li>
+				</ul>      
+			</div>
+		</nav>
+		
+		<div class="container">
+			<div class="row" id="form-insert" data-productid="0">
+				<div class="col-md-12">
+					<h1>Insert</h1>
+					<form id="insertForm">
+						<input name="Name" type="text" placeholder="Name" />
+						<br />
+						<input name="Brand" type="text" placeholder="Brand" />
+						<br />
+						<input name="Source" type="text" placeholder="Source" />
+						<br />
+						<input name="PricePerPackage" type="text" placeholder="Price Per Package" />
+						<br />
+						<input name="AmountByPackage" type="text" placeholder="Content Per Package" />
+						<select class="storeLocation" name="AmountType">
+							<option value="Liter" selected="selected">Liter</option>
+							<option value="Kilos">Kilos</option>
+						</select>
+						<select class="storeLocation" name="StoreName">
+							<option value="walmart" selected="selected">Walmart</option>
+						</select>
+						<select class="storeLocation" name="StoreLocation">
+							<option value="450 westmorland road saint john, nb e2j 4z2" selected="selected">450 Westmorland Rd. Saint John, NB, E2J 4Z2</option>
+						</select>
+						<input name="RelativePrice" type="text" placeholder="Relative Price" />			
+						<select class="storeLocation" name="RelativeType">
+							<option value="100mil" selected="selected">100 Milliliters</option>
+							<option value="100g">100 Grams</option>
+						</select>
+			
+						<input type="submit" value="Insert Item" />
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="blackLayout">
+			<img src="http://media.jumpingjack.com/JumpingJack/loading.gif" />
+		</div>
+		
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+		</script>
+	<body>
+</html>
