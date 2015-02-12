@@ -111,7 +111,7 @@ margin-top: 15px;
 .frontPage input[type="text"] {
 width: 100%;
 }
-.frontPage, .searchResults {
+body {
 background-image: url("img/footer_lodyas.png");
 }
 #mainLogo img {max-width: 35px; display: inline-block;}
