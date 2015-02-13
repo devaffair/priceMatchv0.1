@@ -131,3 +131,6 @@ background-image: url("img/footer_lodyas.png");
     display: block;
     margin-left: 60px;
 }
+form {
+    padding-top: 15px;
+}
