@@ -114,9 +114,20 @@ width: 100%;
 .frontPage, .searchResults {
 background-image: url("img/footer_lodyas.png");
 }
-.logo_img {
-    display: block;
-    max-width: 50%;
-    margin: 0 auto;
+#mainLogo img {max-width: 35px; display: inline-block;}
+#mainLogo{padding: 8px 15px;}
+.btn {padding: 9px 12px;}
+.Location {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: left;
 }
-.logo{margin-bottom: 30px;}
+.map_icon {
+    float: left;
+    margin: 0 10px;
+    width: 25px;
+}
+.Location > a {
+    display: block;
+    margin-left: 60px;
+}
