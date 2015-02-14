@@ -204,102 +204,76 @@ var UserAccount = {
 		});
 	},
 	LoadMyItems: function(){
-		var mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
-		url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
 		
-		if (UserAccount.MyItems.length > 0 && mongoQuery.length > 0) {
-			url = url + mongoQuery;
-		} else {
-			alert("No saved items.");
-			return;
-		}
-		
-		Loading.Show();
-		$(".container").slideUp(500);
-		
-		$.ajax({
-			url: url,
-			type: "GET",
-			contentType: "application/json"
-		}).done(function( data ) {
-			$(".container").slideUp(500);
-
-			$(".container .row").each(function(i){
-				if (i > 0) {
-					$(this).remove();
-				}
-			});
-			var templateHTML = $(".container .row:first")[0].outerHTML;
-			for (var p in data){
-				$(".container").append(templateHTML);
-			
-				var prd = data[p];
-				
-				$(".container .row:last").attr("data-productid", prd.Id);
-				$(".container .row:last span[name='Name']").html(prd.Name);
-				$(".container .row:last span[name='Brand']").html(prd.Brand);
-				$(".container .row:last span[name='RelativePrice']").html(prd.RelativePrice);
-				$(".container .row:last span[name='PricePerPackage']").html(prd.PricePerPackage);
-				$(".container .row:last span[name='AmountByPackage']").html(prd.AmountByPackage);
-				$(".container .row:last span[name='RelativeType']").html(prd.RelativeType);
-				$(".container .row:last span[name='StoreName']").html(prd.StoreName);
-				var storeLocation = '<a target="_new" href="https://www.google.ca/maps?q=' + prd.StoreLocation + '">' + prd.StoreLocation + '</a>';
-				$(".container .row:last span[name='StoreLocation']").html(storeLocation);
-				$(".container .row:last span[name='VotesUp']").html(prd.VotesUp);
-				$(".container .row:last span[name='VotesDown']").html(prd.VotesDown);
-				$(".container .row:last img:first").attr("src", prd.Source);
-				
-				$(".container .row:last .resultsHeader span:first").remove();
-			}
-			
-			Loading.Hide();
-			$(".container").slideDown(500);
-		});
-/*
-		$.ajax({
-			url: url,
-			// data: obj,
-			success: function(data){
-				var templateHTML = $(".container .row:first")[0].outerHTML;
-				
-				Loading.Show();
-				
-				$(".container").slideUp(500);
-
-				$(".container .row").each(function(i){
-					if (i > 0) {
-						$(this).remove();
-					}
-				});
-				
-				for (var p in data){
-					$(".container").append(templateHTML);
-				
-					var prd = data[p];
-					
-					$(".container .row:last").attr("data-productid", prd.Id);
-					$(".container .row:last span[name='Name']").html(prd.Name);
-					$(".container .row:last span[name='Brand']").html(prd.Brand);
-					$(".container .row:last span[name='RelativePrice']").html(prd.RelativePrice);
-					$(".container .row:last span[name='PricePerPackage']").html(prd.PricePerPackage);
-					$(".container .row:last span[name='AmountByPackage']").html(prd.AmountByPackage);
-					$(".container .row:last span[name='RelativeType']").html(prd.RelativeType);
-					$(".container .row:last span[name='StoreName']").html(prd.StoreName);
-					var storeLocation = '<a target="_new" href="https://www.google.ca/maps?q=' + prd.StoreLocation + '">' + prd.StoreLocation + '</a>';
-					$(".container .row:last span[name='StoreLocation']").html(storeLocation);
-					$(".container .row:last span[name='VotesUp']").html(prd.VotesUp);
-					$(".container .row:last span[name='VotesDown']").html(prd.VotesDown);
-					$(".container .row:last img:first").attr("src", prd.Source);
-				}
-				
-				Loading.Hide();
-				$(".container").slideDown(500);
-			},
-			dataType: "json"
-		});
-		*/
 	}
 };
+function ShowSearchedItemTab(obj) {
+	$(obj).tab('show');
+	var storeName = $(this).data().storename;
+	
+	var mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
+	url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
+	
+	if (storeName == "All") {
+		// do as usual
+	} else {
+		mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
+		// AND {"StoreName": "' + storeName + '"}
+	}
+	
+	if (UserAccount.MyItems.length > 0 && mongoQuery.length > 0) {
+		url = url + mongoQuery;
+	} else {
+		alert("No saved items.");
+		return;
+	}
+	
+	Loading.Show();
+	$(".container").slideUp(500);
+	
+	$.ajax({
+		url: url,
+		type: "GET",
+		contentType: "application/json"
+	}).done(function( data ) {
+		$(".container").slideUp(500);
+
+		$(".container .row").each(function(i){
+			if (i > 0) {
+				$(this).remove();
+			}
+		});
+		
+		var currentContainer = $(".container .tab-content div.active");
+		var templateHTML = $(".container .row:first")[0].outerHTML;
+		for (var p in data){
+			// append to the correct place
+			$(currentContainer).append(templateHTML);
+		
+			var prd = data[p];
+			var currentRow = $(currentContainer).find(".row:last");
+			
+			$(currentRow).attr("data-productid", prd.Id);
+			$(currentRow).find("span[name='Name']").html(prd.Name);
+			$(currentRow).find("span[name='Brand']").html(prd.Brand);
+			$(currentRow).find("span[name='RelativePrice']").html(prd.RelativePrice);
+			$(currentRow).find("span[name='PricePerPackage']").html(prd.PricePerPackage);
+			$(currentRow).find("span[name='AmountByPackage']").html(prd.AmountByPackage);
+			$(currentRow).find("span[name='RelativeType']").html(prd.RelativeType);
+			$(currentRow).find("span[name='StoreName']").html(prd.StoreName);
+			var storeLocation = '<a target="_new" href="https://www.google.ca/maps?q=' + prd.StoreLocation + '">' + prd.StoreLocation + '</a>';
+			$(currentRow).find("span[name='StoreLocation']").html(storeLocation);
+			$(currentRow).find("span[name='VotesUp']").html(prd.VotesUp);
+			$(currentRow).find("span[name='VotesDown']").html(prd.VotesDown);
+			$(currentRow).find("img:first").attr("src", prd.Source);
+			
+			$(currentRow).find(".resultsHeader span:first").remove();
+		}
+		
+		Loading.Hide();
+		$(".container").slideDown(500);
+	});
+}
 function integerGuid() {
 	return ((new Date().getUTCMilliseconds()) - ( Math.floor(Math.random() * (5000 - (-5000))) + -5000));
 }

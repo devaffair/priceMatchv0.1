@@ -37,10 +37,14 @@ var BaseActions = {
 			if (currentPath == 'index.html') {
 				window.location.href  = window.location.href.replace(currentPath, 'search.html');
 			} else if (currentPath == "") {
-				window.location.href  = window.location.href + '/search.html';
+				if (window.location.href.indexOf('/') > -1) {
+					window.location.href  = window.location.href + '/search.html';
+				} else {
+					window.location.href  = window.location.href + 'search.html';
+				}
 			}
 		} else {
-			if (currentPath != 'index.html') {
+			if (currentPath.indexOf('index.html') == -1) {
 				window.location.href  = window.location.href.replace(currentPath, 'index.html');
 			}
 		}

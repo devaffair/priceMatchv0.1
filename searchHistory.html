@@ -51,8 +51,63 @@
 				</ul>      
 			</div>
 		</nav>
-		
+		<script type="text/javascript">
+		$(document).ready(function(){ 
+			$("#myTab a").click(function(e){
+				e.preventDefault();
+				ShowSearchedItemTab(this);
+			});
+		});
+		</script>
 		<div class="container">
+			<div class="row" data-productid="xxx">
+					<div class="col-md-12">
+						<div class="resultsWrapper">
+							<img class="thumbnail prdThumbnail" src="http://www.muccifarms.com/navigation-images/mini-cucumbers.png" />
+							<div class="resultsHeader">
+								<span onclick="UserAccount.AddItem(this);" style="cursor:pointer;">Add to My Items: </span><span name="Brand">XXX</span>, <span name="Name">XXX</span>
+							</div>
+							<div class="resultsPrice">Relative Price: <span name="RelativePrice">XXX</span> per <span name="RelativeType">XXX</span> 
+							</div>
+							<div class="PackagePrice">Package Price: <span name="PricePerPackage">XXX</span> </div>
+							<div class="weight">Package weight: <span name="AmountByPackage">XXX</span></div>
+							
+							<div class="storeName">Store Name: <span name="StoreName">XXX</span></div>
+							<div class="Location">
+								<span>
+									<img src="img/map-marker-8.png" class="map_icon">
+								</span>
+								<a href="">
+									<span name="StoreLocation">XXX</span>
+								</a>
+							</div>
+							<div class="resultsFooter">
+							VotesUp: <span name="VotesUp">XXX</span> | VotesDown: <span name="VotesDown">XXX</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			<ul class="nav nav-tabs" id="myTab">
+				<li class="active"><a data-storename="All" href="#sectionA">All</a></li>
+				<li><a data-storename="costco" href="#sectionB">Costco</a></li>
+				<li><a data-storename="wallmart" href="#sectionC">Wall-Mart</a></li>
+				<li><a data-storename="superstore" href="#sectionD">Superstore</a></li>
+			</ul>
+			<div class="tab-content">
+				<div id="sectionA" class="tab-pane fade in active">
+					<h3>All</h3>
+				</div>
+				<div id="sectionB" class="tab-pane fade in">
+					<h3>Costco</h3>
+				</div>
+				<div id="sectionC" class="tab-pane fade in">
+					<h3>Wall-Mart</h3>
+				</div>
+				<div id="sectionD" class="tab-pane fade in">
+					<h3>Superstore</h3>
+				</div>
+			</div>
+			<!--
 			<div class="row" data-productid="xxx">
 				<div class="col-md-12">
 					<div class="resultsWrapper">
@@ -77,10 +132,10 @@
 						<div class="resultsFooter">
 						VotesUp: <span name="VotesUp">XXX</span> | VotesDown: <span name="VotesDown">XXX</span>
 						</div>
-					
-				</div>
+					</div>
 				</div>
 			</div>
+			-->
 		</div>
 		<div class="blackLayout">
 			<img src="img/ajax-loader.gif" />
@@ -91,6 +146,6 @@
 		</script>
 	<body>
 	<script>
-		setTimeout(function(){UserAccount.LoadMyItems();}, 1000);
+		setTimeout(function(){ShowSearchedItemTab($("#myTab li.active a"));}, 1000);
 	</script>
 </html>
