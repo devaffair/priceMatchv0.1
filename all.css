@@ -132,6 +132,7 @@ background-image: url("img/footer_lodyas.png");
 .Location > a {
     display: block;
     margin-left: 60px;
+    padding-right: 15px;
 }
 form {
     padding-top: 15px;
