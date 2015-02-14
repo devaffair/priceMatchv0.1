@@ -36,6 +36,8 @@ var BaseActions = {
 		if (isLoggedIn) {
 			if (currentPath == 'index.html') {
 				window.location.href  = window.location.href.replace(currentPath, 'search.html');
+			} else if (currentPath == "") {
+				window.location.href  = window.location.href + '/search.html';
 			}
 		} else {
 			if (currentPath != 'index.html') {
