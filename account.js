@@ -33,22 +33,27 @@ var BaseActions = {
 	VerifyLogin: function() {
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
 		var currentPath = window.location.href.split('/')[window.location.href.split('/').length-1];
-		if (currentPath == "") {
-			window.location.href = window.location.href.replace('/', '') + "index.html";
+
+		if (currentPath.indexOf('/') == -1) {
+			window.location.href  = '/index.html';
 		}
+		
 		if (isLoggedIn) {
-			if (currentPath == 'index.html') {
-				window.location.href  = window.location.href.replace(currentPath, 'search.html');
+			if (currentPath.inedxOf('index.html') > -1) {
+				window.location.href  = '/search.html';
 			}
 		} else {
 			if (currentPath.indexOf('index.html') == -1) {
-				window.location.href  = window.location.href.replace(currentPath, 'index.html');
+				window.location.href  = '/index.html';
 			}
 		}
 	},
 	Logout: function(){
 		objCookies.Delete(CONST_LOGGED_IN);
 		BaseActions.VerifyLogin();
+	},
+	Redirect: function(relativeUrl) {
+		
 	}
 }
 BaseActions.VerifyLogin();
