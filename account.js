@@ -30,23 +30,28 @@ var objCookies = {
 var CONST_LOGGED_IN = "LoggedIn"
 
 var BaseActions = {
-	VerifyLogin: function() {
-		return;
-		
+	VerifyLogin: function() {		
 		// don't do
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
 		var currentPath = window.location.href.split('/')[window.location.href.split('/').length-1];
 		
+		alert("IsLogged: " + isLoggedIn + "  ||  path:" + currentPath);
+		
 		if (currentPath.indexOf('/') == -1 && currentPath.indexOf('index.html') == -1) {
+			alert("1: " + window.location.href);
 			window.location.href  = '/index.html';
 		}
 		
 		if (isLoggedIn) {
+			alert("2: " + window.location.href);
 			if (currentPath.inedxOf('index.html') > -1) {
+				alert("3: " + window.location.href);
 				window.location.href  = '/search.html';
 			}
 		} else {
+			alert("4: " + window.location.href);
 			if (currentPath.indexOf('index.html') == -1) {
+				alert("5: " + window.location.href);
 				window.location.href  = '/index.html';
 			}
 		}
