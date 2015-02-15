@@ -2,12 +2,16 @@ var CONST_LOGGED_IN = "LoggedIn";
 
 var objCookies = {
 	Create: function(name, val, days){
+		$.cookie(val, name, { expires: days });
+		return;
 		var d = new Date();
 		d.setTime(d.getTime() + (days * 24 * 60 * 60 *1000));
 		var expires = "expires=" + d.toUTCString();
 		document.cookie = name + "=" + val + "; " + expires;
 	},
 	Get: function(name){
+		return $.cookie(name);
+		
 		var name = name + "=";
 		var ca = document.cookie.split(';');
 		for(var i=0; i<ca.length; i++) {
@@ -18,10 +22,14 @@ var objCookies = {
 		return "";
 	},
 	Delete: function(name) {
+		$.removeCookie(name);
+		return;
 		objCookies.Create(name, "");
 		objCookies.Create(name, "", 0);
 	},
 	IsExist: function(name){
+		return $.cookie(name).length > 0;
+		
 		if (objCookies.Get(CONST_LOGGED_IN) == null) return false;
 		if (objCookies.Get(CONST_LOGGED_IN).length > 0) return true;
 		
