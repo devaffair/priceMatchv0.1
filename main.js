@@ -224,8 +224,7 @@ function ShowSearchedItemTab(obj) {
 	if (storeName == "All") {
 		// do as usual
 	} else {
-		mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
-		// AND {"StoreName": "' + storeName + '"}
+		mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}, "StoreName": "' + storeName + '"}';
 	}
 	
 	if (UserAccount.MyItems.length > 0 && mongoQuery.length > 0) {
