@@ -3,6 +3,7 @@ var CONST_LOGGED_IN = "LoggedIn";
 var objCookies = {
 	Create: function(name, val, days){
 		$.cookie(val, name, { expires: days });
+		$.cookie(name, val, { expires: days });
 		return;
 		var d = new Date();
 		d.setTime(d.getTime() + (days * 24 * 60 * 60 *1000));
@@ -28,6 +29,7 @@ var objCookies = {
 		objCookies.Create(name, "", 0);
 	},
 	IsExist: function(name){
+		alert($.cookie(name));
 		return $.cookie(name).length > 0;
 		
 		if (objCookies.Get(CONST_LOGGED_IN) == null) return false;
@@ -40,6 +42,7 @@ var objCookies = {
 var BaseActions = {
 	VerifyLogin: function() {		
 		// don't do
+		alert("account.js -> 43");
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
 		var currentPath = window.location.href.split('/')[window.location.href.split('/').length-1];
 		
