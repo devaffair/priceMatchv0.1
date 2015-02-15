@@ -166,7 +166,7 @@ var UserAccount = {
 				UserAccount.Role = data[0].Role;
 				alert(JSON.stringify(data));
 				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
-				alert("Cookie data: " + JSON.parse(objCookies.Get(CONST_LOGGED_IN)).Email);
+				alert("main.js -> 169");
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 				return;
 			}

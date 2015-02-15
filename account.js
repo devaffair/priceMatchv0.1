@@ -44,6 +44,7 @@ var objCookies = {
 
 var BaseActions = {
 	VerifyLogin: function() {		
+		window.location.href  = '/search.html';
 		// don't do
 		alert("account.js -> 43");
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
