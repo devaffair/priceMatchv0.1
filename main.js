@@ -4,8 +4,12 @@ var collection = "Products"
 var url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
 
 var Loading = {
-	Show: function() {
-		$(".blackLayout").show();
+	Show: function(time, func) {
+		if (time && func) {
+			$(".blackLayout").show(time, func);
+		} else {
+			$(".blackLayout").show();
+		}
 	},
 	Hide: function() {
 		$(".blackLayout").hide();
@@ -114,6 +118,9 @@ $(document).ready(function(){
 		UserAccount.Role = data.Role;
 		UserAccount.RegisteredUserActions();
 	}
+	
+	// undone features
+	$(".container .row:last span[name='VotesDown']").parent().html("");
 });
 
 var UserAccount = {
@@ -204,12 +211,12 @@ var UserAccount = {
 		});
 	},
 	LoadMyItems: function(){
-		
+		alert("Obsolete method: LoadMyItems.  main.js -> Line 207.");
 	}
 };
 function ShowSearchedItemTab(obj) {
 	$(obj).tab('show');
-	var storeName = $(this).data().storename;
+	var storeName = $(obj).data().storename;
 	
 	var mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
 	url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
@@ -228,23 +235,32 @@ function ShowSearchedItemTab(obj) {
 		return;
 	}
 	
-	Loading.Show();
-	$(".container").slideUp(500);
-	
+	Loading.Show(500, function(){
+		var currentContainer = $(".container .tab-content div.active");
+		$(currentContainer).slideUp(500);
+		
+		GenericPopulatePage(currentContainer, url);
+	});
+}
+
+function GenericPopulatePage(currentContainer, url) {
 	$.ajax({
 		url: url,
 		type: "GET",
 		contentType: "application/json"
 	}).done(function( data ) {
-		$(".container").slideUp(500);
-
 		$(".container .row").each(function(i){
 			if (i > 0) {
 				$(this).remove();
 			}
 		});
 		
-		var currentContainer = $(".container .tab-content div.active");
+		$(".tab-pane").each(function(){
+			if (!$(this).hasClass("active")){
+				$(this).hide();
+			}
+		});
+		
 		var templateHTML = $(".container .row:first")[0].outerHTML;
 		for (var p in data){
 			// append to the correct place
@@ -271,9 +287,10 @@ function ShowSearchedItemTab(obj) {
 		}
 		
 		Loading.Hide();
-		$(".container").slideDown(500);
+		$(currentContainer).slideDown(500);
 	});
 }
+
 function integerGuid() {
 	return ((new Date().getUTCMilliseconds()) - ( Math.floor(Math.random() * (5000 - (-5000))) + -5000));
 }
