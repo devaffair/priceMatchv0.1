@@ -51,9 +51,6 @@ var BaseActions = {
 	Logout: function(){
 		objCookies.Delete(CONST_LOGGED_IN);
 		BaseActions.VerifyLogin();
-	},
-	Redirect: function(relativeUrl) {
-		
 	}
 }
 BaseActions.VerifyLogin();
