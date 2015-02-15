@@ -15,8 +15,10 @@
 	display:none;
 }
 .blackLayout img {
-	position:relative;
-	width: 25%;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25%;
 }
 
 /*NIV'S*/
@@ -123,13 +125,14 @@ background-image: url("img/footer_lodyas.png");
     text-align: left;
 }
 .map_icon {
-    float: left;
-    margin: 0 10px;
-    width: 25px;
+    /*float: left;*/
+    margin: 0 20px;
+    width: 16px;
 }
 .Location > a {
-    display: block;
-    margin-left: 60px;
+	display: inline-block;
+    margin-left: 15px;
+    padding-right: 15px;
 }
 form {
     padding-top: 15px;
