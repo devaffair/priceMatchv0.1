@@ -33,8 +33,8 @@ var BaseActions = {
 	VerifyLogin: function() {
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
 		var currentPath = window.location.href.split('/')[window.location.href.split('/').length-1];
-
-		if (currentPath.indexOf('/') == -1) {
+		debugger;
+		if (currentPath.indexOf('/') == -1 && currentPath.indexOf('index.html') == -1) {
 			window.location.href  = '/index.html';
 		}
 		
