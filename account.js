@@ -1,3 +1,5 @@
+var CONST_LOGGED_IN = "LoggedIn";
+
 var objCookies = {
 	Create: function(name, val, days){
 		var d = new Date();
@@ -26,8 +28,6 @@ var objCookies = {
 		return false;
 	}
 };
-
-var CONST_LOGGED_IN = "LoggedIn"
 
 var BaseActions = {
 	VerifyLogin: function() {		

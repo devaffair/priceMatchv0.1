@@ -182,7 +182,8 @@ var UserAccount = {
 				contentType: "application/json"
 			}).done(function( msg ) {
 				UserAccount.Email = data.Email;
-				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
+				objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
+				alert("Cookie data: " + JSON.parse(objCookies.Get(CONST_LOGGED_IN)).Email);
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 			});
 		});
