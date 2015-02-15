@@ -15,10 +15,8 @@
 	display:none;
 }
 .blackLayout img {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 25%;
+	position:relative;
+	width: 25%;
 }
 
 /*NIV'S*/
@@ -132,7 +130,6 @@ background-image: url("img/footer_lodyas.png");
 .Location > a {
     display: block;
     margin-left: 60px;
-    padding-right: 15px;
 }
 form {
     padding-top: 15px;
