@@ -137,7 +137,7 @@ var UserAccount = {
 	},
 	Login:function(){
 		var email = $("#email").val();
-		
+		alert(email);
 		if (email.length < 3) {
 			alert("Please provide a valid email");
 			return false;
@@ -148,14 +148,16 @@ var UserAccount = {
 		};
 		
 		url = 'https://api.mongolab.com/api/1/databases/' + db + '/collections/Users?apiKey=' + ApiKey + '&q={"Email":"' + email + '"}';
-		
+		alert(url);
 		$.ajax({
 			url: url,
 			type: "GET",
 			data: JSON.stringify(user),
 			contentType: "application/json"
 		}).done(function( data ) {
+			alert("done login");
 			if (data != null && data[0] != null) {
+				alert(JSON.stringify(data));
 				// UserAccount.Id = data[0].Id;
 				if (data[0].MyItems == "") {
 					UserAccount.MyItems = [];
@@ -167,7 +169,7 @@ var UserAccount = {
 				UserAccount.Role = data[0].Role;
 				
 				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
-				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
+				setTimeout(function(){ BaseActions.VerifyLogin(); alert("Login Redirect");}, 150);
 				return;
 			}
 			
