@@ -33,7 +33,7 @@ var objCookies = {
 	},
 	IsExist: function(name){
 		alert("account.js -> 33:" + $.cookie(name));
-		return ($.cookie(name) == null || $.cookie(name).length > 0);
+		return ($.cookie(name) != null &&$.cookie(name).length > 0);
 		
 		if (objCookies.Get(CONST_LOGGED_IN) == null) return false;
 		if (objCookies.Get(CONST_LOGGED_IN).length > 0) return true;
