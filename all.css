@@ -125,13 +125,13 @@ background-image: url("img/footer_lodyas.png");
     text-align: left;
 }
 .map_icon {
-    /*float: left;*/
-    margin: 0 20px;
-    width: 16px;
+    float: left;
+    margin: 0 10px;
+    width: 25px;
 }
 .Location > a {
-	display: inline-block;
-    margin-left: 15px;
+    display: block;
+    margin-left: 60px;
     padding-right: 15px;
 }
 form {

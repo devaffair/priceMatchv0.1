@@ -4,12 +4,8 @@ var collection = "Products"
 var url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
 
 var Loading = {
-	Show: function(time, func) {
-		if (time && func) {
-			$(".blackLayout").show(time, func);
-		} else {
-			$(".blackLayout").show();
-		}
+	Show: function() {
+		$(".blackLayout").show();
 	},
 	Hide: function() {
 		$(".blackLayout").hide();
@@ -118,9 +114,6 @@ $(document).ready(function(){
 		UserAccount.Role = data.Role;
 		UserAccount.RegisteredUserActions();
 	}
-	
-	// undone features
-	$(".container .row:last span[name='VotesDown']").parent().html("");
 });
 
 var UserAccount = {
@@ -137,6 +130,7 @@ var UserAccount = {
 	},
 	Login:function(){
 		var email = $("#email").val();
+		
 		if (email.length < 3) {
 			alert("Please provide a valid email");
 			return false;
@@ -147,7 +141,7 @@ var UserAccount = {
 		};
 		
 		url = 'https://api.mongolab.com/api/1/databases/' + db + '/collections/Users?apiKey=' + ApiKey + '&q={"Email":"' + email + '"}';
-		alert(url);
+		
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -164,9 +158,8 @@ var UserAccount = {
 				
 				UserAccount.Email = data[0].Email;
 				UserAccount.Role = data[0].Role;
-				alert(JSON.stringify(data));
+				
 				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
-				alert("main.js -> 169");
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 				return;
 			}
@@ -183,9 +176,7 @@ var UserAccount = {
 				contentType: "application/json"
 			}).done(function( msg ) {
 				UserAccount.Email = data.Email;
-				
-				objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
-				alert("Cookie data: " + JSON.parse(objCookies.Get(CONST_LOGGED_IN)).Email);
+				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 			});
 		});
@@ -213,12 +204,12 @@ var UserAccount = {
 		});
 	},
 	LoadMyItems: function(){
-		alert("Obsolete method: LoadMyItems.  main.js -> Line 207.");
+		
 	}
 };
 function ShowSearchedItemTab(obj) {
 	$(obj).tab('show');
-	var storeName = $(obj).data().storename;
+	var storeName = $(this).data().storename;
 	
 	var mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
 	url = "https://api.mongolab.com/api/1/databases/" + db + "/collections/" + collection + "?apiKey=" + ApiKey;	
@@ -226,7 +217,8 @@ function ShowSearchedItemTab(obj) {
 	if (storeName == "All") {
 		// do as usual
 	} else {
-		mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}, "StoreName": "' + storeName + '"}';
+		mongoQuery = '&q={"Id": {"$in": [' + UserAccount.MyItems.join(',') + ']}}';
+		// AND {"StoreName": "' + storeName + '"}
 	}
 	
 	if (UserAccount.MyItems.length > 0 && mongoQuery.length > 0) {
@@ -236,32 +228,23 @@ function ShowSearchedItemTab(obj) {
 		return;
 	}
 	
-	Loading.Show(500, function(){
-		var currentContainer = $(".container .tab-content div.active");
-		$(currentContainer).slideUp(500);
-		
-		GenericPopulatePage(currentContainer, url);
-	});
-}
-
-function GenericPopulatePage(currentContainer, url) {
+	Loading.Show();
+	$(".container").slideUp(500);
+	
 	$.ajax({
 		url: url,
 		type: "GET",
 		contentType: "application/json"
 	}).done(function( data ) {
+		$(".container").slideUp(500);
+
 		$(".container .row").each(function(i){
 			if (i > 0) {
 				$(this).remove();
 			}
 		});
 		
-		$(".tab-pane").each(function(){
-			if (!$(this).hasClass("active")){
-				$(this).hide();
-			}
-		});
-		
+		var currentContainer = $(".container .tab-content div.active");
 		var templateHTML = $(".container .row:first")[0].outerHTML;
 		for (var p in data){
 			// append to the correct place
@@ -288,10 +271,9 @@ function GenericPopulatePage(currentContainer, url) {
 		}
 		
 		Loading.Hide();
-		$(currentContainer).slideDown(500);
+		$(".container").slideDown(500);
 	});
 }
-
 function integerGuid() {
 	return ((new Date().getUTCMilliseconds()) - ( Math.floor(Math.random() * (5000 - (-5000))) + -5000));
 }
