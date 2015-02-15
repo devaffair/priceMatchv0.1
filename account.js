@@ -2,7 +2,10 @@ var CONST_LOGGED_IN = "LoggedIn";
 
 var objCookies = {
 	Create: function(name, val, days){
-		$.cookie(val, name, { expires: days });
+		alert("name: " + name);
+		alert("val: " + val);
+		alert("days: " + days);
+		// $.cookie(val, name, { expires: days });
 		$.cookie(name, val, { expires: days });
 		return;
 		var d = new Date();
@@ -29,8 +32,8 @@ var objCookies = {
 		objCookies.Create(name, "", 0);
 	},
 	IsExist: function(name){
-		alert($.cookie(name));
-		return $.cookie(name).length > 0;
+		alert("account.js -> 33:" + $.cookie(name));
+		return ($.cookie(name) == null || $.cookie(name).length > 0);
 		
 		if (objCookies.Get(CONST_LOGGED_IN) == null) return false;
 		if (objCookies.Get(CONST_LOGGED_IN).length > 0) return true;
