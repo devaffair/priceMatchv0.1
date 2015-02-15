@@ -25,7 +25,10 @@
       permission on your app, which PhoneGap requires.
     -->
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 5b5e54d... add config.xml
     <!-- to enable individual permissions use the following examples -->
     <!--
     <feature name="http://api.phonegap.com/1.0/battery"/>
@@ -36,5 +39,8 @@
     <feature name="http://api.phonegap.com/1.0/media"/>
     <feature name="http://api.phonegap.com/1.0/network"/>
     <feature name="http://api.phonegap.com/1.0/notification"/>
+<<<<<<< HEAD
     -->
+=======
+>>>>>>> parent of 5b5e54d... add config.xml
 </widget>
