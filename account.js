@@ -1,4 +1,4 @@
-var CONST_LOGGED_IN = "LoggedIn";
+var CONST_LOGGED_IN = "LoggedIn1";
 
 var objCookies = {
 	Create: function(name, val, days){

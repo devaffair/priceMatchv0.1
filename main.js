@@ -165,7 +165,7 @@ var UserAccount = {
 				UserAccount.Email = data[0].Email;
 				UserAccount.Role = data[0].Role;
 				alert(JSON.stringify(data));
-				objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
+				objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
 				alert("main.js -> 169");
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 				return;
@@ -208,7 +208,7 @@ var UserAccount = {
 			data: JSON.stringify({ "$set" : { "MyItems" : UserAccount.MyItems.join(',') } }),
 			contentType: "application/json"
 		}).done(function( data ) {
-			objCookies.Create("LoggedIn", JSON.stringify(UserAccount), 360);
+			objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
 			setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 		});
 	},
