@@ -147,7 +147,7 @@ var UserAccount = {
 		};
 		
 		url = 'https://api.mongolab.com/api/1/databases/' + db + '/collections/Users?apiKey=' + ApiKey + '&q={"Email":"' + email + '"}';
-		alert(url);
+
 		$.ajax({
 			url: url,
 			type: "GET",
@@ -164,9 +164,8 @@ var UserAccount = {
 				
 				UserAccount.Email = data[0].Email;
 				UserAccount.Role = data[0].Role;
-				alert(JSON.stringify(data));
+				
 				objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
-				alert("main.js -> 169");
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 				return;
 			}
@@ -185,7 +184,7 @@ var UserAccount = {
 				UserAccount.Email = data.Email;
 				
 				objCookies.Create(CONST_LOGGED_IN, JSON.stringify(UserAccount), 360);
-				alert("Cookie data: " + JSON.parse(objCookies.Get(CONST_LOGGED_IN)).Email);
+
 				setTimeout(function(){ BaseActions.VerifyLogin(); }, 150);
 			});
 		});
