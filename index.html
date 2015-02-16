@@ -3,14 +3,15 @@
 		<title>DevAffair - Price Compare App</title>
 		<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 		<script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="all.css">
-		<script src="account.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">		
 	</head>
 	<body class="frontPage">
+		<div id="LinkNav" style="display:none !important;">
+			<a name="index" href="index.html"></a>
+			<a name="search" href="search.html"></a>
+			<a name="searchHistory" href="searchHistory.html"></a>
+			<a name="insert" href="insert.html"></a>
+		</div>
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -24,7 +25,6 @@
 		</nav>
 		
 		<div class="container">
-
 			<div class="row">
 				<div class="col-md-12">
 					<form id="loginForm">
@@ -35,6 +35,12 @@
 				</div>
 			</div>
 		</div>
+		
+		<script src="account.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="all.css">
+		
 		<div class="blackLayout">
 			<img src="http://media.jumpingjack.com/JumpingJack/loading.gif" />
 		</div>
