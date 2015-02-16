@@ -31,38 +31,48 @@ var objCookies = {
 
 var BaseActions = {
 	VerifyLogin: function() {		
+		// if not a valid (html) page - redirect to index
+		
 		// if logged in
 		// // if index - redirect to search
 		// else
 		// // if NOT index - redirect to index
 	
+		if (window.location.href.toLowerCase().indexOf("html") == -1) {
+			BaseActions.LoadLogin();
+		}
+	
 		var isLoggedIn = objCookies.IsExist(CONST_LOGGED_IN);
 		if (isLoggedIn) {
-			if (window.location.href.toLowerCase().indexOf("index") > -1) {
-				BaseActions.LoadIndex();
+			if (window.location.href.toLowerCase().indexOf("index") > -1 || 
+			window.location.href.toLowerCase().indexOf("login") > -1) {
+				BaseActions.LoadSearch();
 			}
 		} else {
-			if (window.location.href.toLowerCase().indexOf("index") == -1) {
-				BaseActions.LoadIndex();
+			if (window.location.href.toLowerCase().indexOf("login") == -1) {
+				BaseActions.LoadLogin();
 			}
 		}
 	},
 	Logout: function(){
 		objCookies.Delete(CONST_LOGGED_IN);
-		BaseActions.LoadIndex();
+		BaseActions.LoadLogin();
 	},
 	LoadIndex: function(){
-		$("#LinkNav a[name='index']").click();
+		window.location.href = $("#LinkNav a[name='index']").attr("href");
 	},
 	LoadSearch: function(){
-		$("#LinkNav a[name='search']").click();
+		window.location.href = $("#LinkNav a[name='search']").attr("href");
 	},
 	LoadSearchHistory: function(){
-		$("#LinkNav a[name='searchHistory']").click();
+		window.location.href = $("#LinkNav a[name='searchHistory']").attr("href");
 	},
 	LoadInsert: function(){
-		$("#LinkNav a[name='insert']").click();
+		window.location.href = $("#LinkNav a[name='insert']").attr("href");
 	},
+	LoadLogin: function(){
+		window.location.href = $("#LinkNav a[name='login']").attr("href");
+	}
 }
 
 BaseActions.VerifyLogin();
